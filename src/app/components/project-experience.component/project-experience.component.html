@@ -1,0 +1,24 @@
+<div class="page-container">
+  <h2 class="section-title">Projects</h2>
+  @for (project of (projects$ | async); track project.id) {
+    <div class="content-card" [id]="'project-' + project.id" [class.active-target]="activeFragment === 'project-' + project.id">
+      <h3>{{ project.name }}</h3>
+      <a href="{{ project.repoURL }}" target="_blank">
+        Project GitHub Repository
+      </a>
+      <p>{{ project.description }}</p>
+      @if (project.technologies.length > 0) {
+        <p>Languages/Frameworks: 
+        @for (tech of project.technologies; track tech) {
+          <a 
+            [routerLink]="['/resume']" 
+            [fragment]="formatSkillId(tech)" 
+            class="tech-badge">
+            {{ tech }}
+          </a>
+        } 
+        </p>
+    }
+    </div>
+  }
+</div>
