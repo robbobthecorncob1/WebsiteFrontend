@@ -1,9 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SystemStatus } from './models/system-status.model';
 import { PortfolioService } from './services/portfolio.service';
 import { CommonModule } from '@angular/common';
+import { ThemeService } from './services/theme.service';
 
 /**
  * The Root Component of the application.
@@ -20,7 +21,7 @@ import { CommonModule } from '@angular/common';
 export class App {
   status$!: Observable<SystemStatus | null>;
   protected readonly title = signal('website-frontend');
-  
+  public themeService = inject(ThemeService);
   /**
    * @param portfolioService Injected service to handle global API health monitoring.
    */
