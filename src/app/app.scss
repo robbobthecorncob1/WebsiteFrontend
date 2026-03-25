@@ -1,0 +1,107 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--bg-primary);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: var(--bg-primary);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .main-nav {
+    display: flex;
+    gap: 1.5rem;
+
+    a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 500;
+      padding-bottom: 0.25rem;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease-in-out;
+
+      &:hover { color: var(--accent-hover); }
+      &.active-link {
+        color: var(--accent-color);
+        border-bottom-color: var(--accent-color);
+      }
+    }
+  }
+}
+
+.content-container {
+  flex: 1;
+  padding: 2rem;
+}
+
+.main-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background-color: var(--bg-footer);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+
+  .status-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    &:hover { opacity: 0.8; text-decoration: underline; }
+  }
+}
+
+.monogram {
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 1.8rem;
+  letter-spacing: -2px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+
+  .first-initial { color: var(--accent-color); }
+  .last-initial { color: var(--text-main); }
+  &:hover { transform: scale(1.05); }
+}
+
+@media (max-width: 768px) {
+  .main-header {
+    flex-direction: column;
+    gap: 1rem;
+    .main-nav { flex-wrap: wrap; justify-content: center; }
+  }
+  .main-footer { flex-direction: column; text-align: center; }
+}
