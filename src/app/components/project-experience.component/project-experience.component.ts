@@ -13,7 +13,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 @Component({
   selector: 'projects',
   imports: [AsyncPipe, RouterLink],
-  templateUrl: './project-experience.component.html'
+  templateUrl: './project-experience.component.html',
+  styleUrl: './project-experience.component.scss'
 })
 export class ProjectExperienceComponent implements OnInit {
   private route = inject(ActivatedRoute);
