@@ -10,8 +10,7 @@ import { EducationProgram } from '../../../models/education-list.model';
 @Component({
   selector: 'education-list',
   standalone: true,
-  templateUrl: './education-list.component.html',
-  styleUrl: './education-list.component.scss',
+  templateUrl: './education-list.component.html'
 })
 export class EducationListComponent {
   /** 
