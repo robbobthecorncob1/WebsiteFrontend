@@ -10,5 +10,5 @@ import { provideHttpClient } from '@angular/common/http';
  * initialized when the application bootstraps. 
  */
 export const appConfig: ApplicationConfig = {
-  providers: [provideBrowserGlobalErrorListeners(), provideRouter( routes, withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled'}) ), provideHttpClient()]
+  providers: [provideBrowserGlobalErrorListeners(), provideRouter( routes, withInMemoryScrolling({ anchorScrolling: 'disabled', scrollPositionRestoration: 'enabled'}) ), provideHttpClient()]
 }
