@@ -1,0 +1,51 @@
+<div class="skills-grid">
+  @for (skill of skills; track skill.skillName) {
+    <div class="skill-card" [class.flipped]="skill.isFlipped" (click)="toggleFlip(skill)" [id]="formatSkillId(skill.skillName)" [class.active-target]="activeFragment === formatSkillId(skill.skillName)">
+      
+      <div class="card-inner">
+        <div class="card-front">
+          <h3>{{ skill.skillName }}</h3>
+          <span class="click-hint">Click to see experience ⤵</span>
+        </div>
+        
+        <div class="card-back">
+          <h4>{{ skill.skillName }}</h4>
+          
+          <div class="scrollable-content">
+            
+            @if (skill.jobsSkillUsed.length > 0) {
+              <div class="usage-group">
+                <h5>Work Experience</h5>
+                <ul>
+                  @for (job of skill.jobsSkillUsed; track job.id) {
+                    <li>
+                      <a [routerLink]="['/resume']" [fragment]="'job-' + job.id" (click)="handleJobClick('job-' + job.id, $event)">
+                        {{ job.position }} - {{job.company}}
+                      </a>
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+
+            @if (skill.projectsSkillUsed.length > 0) {
+              <div class="usage-group">
+                <h5>Projects</h5>
+                <ul>
+                  @for (project of skill.projectsSkillUsed; track project.id) {
+                    <li>
+                      <a [routerLink]="['/projects']" [fragment]="'project-' + project.id" (click)="$event.stopPropagation()">
+                        {{ project.name }}
+                      </a>
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

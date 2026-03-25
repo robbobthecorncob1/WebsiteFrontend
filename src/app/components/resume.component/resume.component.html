@@ -1,0 +1,24 @@
+@if (resumeData$ | async; as resumeData) {
+<div class="page-container">
+  
+  <section class="resume-section">
+    <h2 class="section-title">Professional Experience</h2>
+    <work-experience [jobs]="resumeData.jobs"></work-experience>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="resume-section">
+    <h2 class="section-title">Education</h2>
+    <education-list [educationList]="resumeData.education"></education-list>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="resume-section">
+    <h2 class="section-title">Skills</h2>
+    <skills [initialSkills]="resumeData.skills"></skills>
+  </section>
+
+</div>
+}

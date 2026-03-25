@@ -1,0 +1,31 @@
+<div class="status-wrapper">
+  <div class="header">
+    <h2>System Status</h2>
+    <p>Real-time health monitoring for the portfolio infrastructure.</p>
+  </div>
+
+  <div class="status-grid">
+    <div class="status-card">
+      <div class="indicator" [class.online]="statusData.apiStatus === 'Operational'"></div>
+      <div class="info">
+        <h3>C# .NET 10 API</h3>
+        <span class="status-text">{{ statusData.apiStatus }}</span>
+      </div>
+    </div>
+
+    <div class="status-card">
+      <div class="indicator" [class.online]="statusData.databaseStatus === 'Operational'"></div>
+      <div class="info">
+        <h3>SQLite Database</h3>
+        <span class="status-text">{{ statusData.databaseStatus }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-metrics">
+    <p>Version: {{ statusData.version }}</p>
+    <p>{{ statusData.environment }}</p>
+    <p>Uptime: {{ formatUptime(currentUptimeMs) }}</p>
+    <button class="refresh-btn" (click)="refreshStatus()">Refresh Status</button>
+  </div>
+</div>
