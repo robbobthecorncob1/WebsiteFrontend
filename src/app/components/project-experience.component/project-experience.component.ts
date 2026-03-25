@@ -9,14 +9,11 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
  * Renders a list of personal and professional software projects.
  * @remarks
  * This component utilizes the `appResolver` to pre-fetch project data.
- * It also features advanced "deep-linking" capabilities, allowing the application
- * to scroll to and highlight specific projects based on URL fragments (e.g., #project-5).
  */
 @Component({
   selector: 'projects',
   imports: [AsyncPipe, RouterLink],
-  templateUrl: './project-experience.component.html',
-  styleUrl: './project-experience.component.scss',
+  templateUrl: './project-experience.component.html'
 })
 export class ProjectExperienceComponent implements OnInit {
   private route = inject(ActivatedRoute);
@@ -24,21 +21,31 @@ export class ProjectExperienceComponent implements OnInit {
   projects$!: Observable<Project[]>;
 
   /**
-   * Initialization:
-   * 1. Subscribes to fragment changes to support smooth scrolling to targeted projects.
-   * 2. Extracts the pre-resolved project data from the route snapshot.
+   * Initializes the component and sets up data and fragment observers.
+   * Logic:
+   * 1. Maps the 'pageData' from the route resolver to the projects$ observable.
+   * 2. Subscribes to fragment changes to identify when a specific project is being targeted (e.g., #project-5).
+   * 3. Uses a delay to ensure the DOM is painted (important when navigating from other pages).
+   * 4. Triggers a CSS highlight animation and centers the project card on the screen.
    */
   ngOnInit(): void {
+    this.projects$ = this.route.data.pipe( map(data => data['pageData']));
+
     this.route.fragment.subscribe(fragment => {
-      if (fragment) {
-        this.activeFragment = fragment;
+      this.activeFragment = fragment;
+      
+      if (fragment && fragment.startsWith('project-')) {
         setTimeout(() => {
           const element = document.getElementById(fragment);
-          if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          if (element) {
+            element.classList.remove('active-target');
+            void element.offsetWidth;
+            element.classList.add('active-target');
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
         }, 100);
       }
     });
-    this.projects$ = this.route.data.pipe( map(data => data['pageData']));
   }
 
   /**

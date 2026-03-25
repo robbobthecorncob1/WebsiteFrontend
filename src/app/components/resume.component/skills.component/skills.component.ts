@@ -36,64 +36,79 @@ export class SkillsComponent implements OnInit {
   @Input({ required: true }) set initialSkills(data: Skill[]) {
     if (data) this.skills = data.map((skill) => ({...skill,isFlipped: false }));
   }
-
   constructor(private route: ActivatedRoute, private cdr: ChangeDetectorRef) {}
 
   /**
-   * Initialization:
-   * Subscribes to route fragments to support deep-linking.
+   * Initializes the component and sets up a subscription to the URL fragment.
+   * Logic:
+   * 1. Listens for fragment changes (e.g., #skill-angular).
+   * 2. If the fragment matches a skill, it flips that card.
+   * 3. Triggers a "pulse" highlight animation and centers the element.
    */
   ngOnInit(): void {
     this.route.fragment.subscribe((fragment: string | null) => {
       this.activeFragment = fragment;
-      if (this.skills && this.skills.length > 0) setTimeout(() => this.checkAndScrollToFragment(), 100);
+      
+      if (fragment && fragment.startsWith('skill-')) {
+        if (this.skills.length > 0) {
+          this.skills = this.skills.map(skill => ({
+            ...skill, 
+            isFlipped: this.formatSkillId(skill.skillName) === fragment
+          }));
+          this.cdr.detectChanges(); 
+        }
+
+        setTimeout(() => {
+          const element = document.getElementById(fragment);
+          if (element) {
+            element.classList.remove('active-target');
+            void element.offsetWidth;
+            element.classList.add('active-target');
+            
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 100);
+      }
     });
   }
 
   /**
-   * Handles state-driven UI updates when a specific skill is targeted via URL fragment.
-   * Logic:
-   * 1. Updates the `isFlipped` state to reveal the back of the card.
-   * 2. Calculates the scroll position with a 100px offset for the site header.
+   * Manages navigation from the back of a skill card to a specific Work Experience entry.
+   * @param elementId - The ID of the job element to scroll to (e.g., 'job-1').
+   * @param event - The click event from the template.
+   * @remarks
+   * This method handles a specific edge case: if the user is already on the target fragment,
+   * Angular's router will not emit a change. We manually trigger the highlight and scroll
+   * logic here to ensure the UI remains responsive to repeat clicks.
    */
-  private checkAndScrollToFragment(): void {
-    if (this.activeFragment && this.activeFragment.startsWith('skill-')) {
-      if (this.skills && this.skills.length > 0) {
-        this.skills = this.skills.map(skill => ({...skill, isFlipped: this.formatSkillId(skill.skillName) === this.activeFragment}));
-        this.cdr.detectChanges(); 
+  handleJobClick(elementId: string, event: Event): void {
+    event.stopPropagation();
+    if (this.route.snapshot.fragment === elementId) {
+      event.preventDefault(); 
+      
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.classList.remove('active-target');
+        void element.offsetWidth;
+        element.classList.add('active-target');
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-
-      setTimeout(() => {
-        const element = document.getElementById(this.activeFragment!);
-        
-        if (element) {   
-          window.scrollTo({
-            top: element.getBoundingClientRect().top + window.scrollY - 100,
-            behavior: 'smooth'
-          });
-        }
-      }, 150);
     }
   }
 
   /**
    * Manually toggles the flip state of a skill card on user click.
+   * @param skill - The SkillUI card object to flip.
    */
   toggleFlip(skill: SkillUI): void {
     skill.isFlipped = !skill.isFlipped;
   }
-
-  /**
-   * Prevents the card from flipping back over when the user clicks 
-   * a link on the back of the card (e.g., a link to a specific job).
-   */
-  scrollToJob(elementId: string, event: Event): void {
-    event.stopPropagation(); 
-  }
   
-  /**
-   * Formats skill names into valid HTML IDs.
-   * Example: "C#" -> "skill-c#"
+/**
+   * Helper to transform technology names into consistent HTML IDs.
+   * Used for generating back-links to the Skills section.
+   * @param skillName - The raw name of the technology (e.g., "C#")
+   * @returns A kebab-case ID (e.g., "skill-c#")
    */
   formatSkillId(skillName: string): string {
     return 'skill-' + skillName.replace(/\s+/g, '-').toLowerCase();

@@ -6,13 +6,11 @@ import { ActivatedRoute } from '@angular/router';
  * Work Experience Component is a presentational component that renders a list of professional roles.
  * @remarks
  * It relies on its parent (`ResumeComponent`) to provide an array of {@link Job} objects.
- * It maintains internal logic for fragment-based scrolling and highlighting.
  */
 @Component({
   selector: 'work-experience',
   standalone: true,
-  templateUrl: './work-experience.component.html',
-  styleUrl: './work-experience.component.scss',
+  templateUrl: './work-experience.component.html'
 })
 export class WorkExperienceComponent implements OnInit {
   @Input({ required: true }) jobs: Job[] = [];
@@ -21,22 +19,29 @@ export class WorkExperienceComponent implements OnInit {
   public activeFragment: string | null = null;
 
   /**
-   * Initialization:
-   * Subscribes to the route fragment. If a fragment exists (e.g., when 
-   * navigating from a Skill card), it updates the local state and 
-   * triggers a smooth scroll to the specific element.
+   * Initializes the component and subscribes to URL fragment changes.
+   * Logic:
+   * 1. Listens for fragments specifically targeting jobs (e.g., #job-2).
+   * 2. Uses a small timeout to ensure the DOM is fully rendered before searching for the element.
+   * 3. Triggers a "pulse" highlight animation by forcing a browser reflow.
+   * 4. Centers the specific job card in the middle.
    */
   ngOnInit(): void {
     this.route.fragment.subscribe(fragment => {
-      if (fragment) {
-        this.activeFragment = fragment;
+      this.activeFragment = fragment;
+      
+      if (fragment && fragment.startsWith('job-')) {
         setTimeout(() => {
           const element = document.getElementById(fragment);
           if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            element.classList.remove('active-target');
+            void element.offsetWidth;
+            element.classList.add('active-target');
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
-        }, 100); 
+        }, 100);
       }
     });
   }
+
 }
