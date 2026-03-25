@@ -1,0 +1,6 @@
+@for (job of jobs; track job.id) {
+  <div class="content-card" [id]="'job-' + job.id" [class.active-target]="activeFragment === 'job-' + job.id">
+    <h3>{{ job.position }} at {{ job.company }}</h3>
+    <p>{{ job.description }}</p>
+  </div>
+}
