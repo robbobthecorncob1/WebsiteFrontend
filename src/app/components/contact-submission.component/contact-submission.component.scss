@@ -1,0 +1,65 @@
+.contact-wrapper {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+
+  h2 { margin-top: 0; }
+  .subtitle { color: var(--text-muted); margin-bottom: 2rem; }
+}
+
+.success-banner {
+  background-color: var(--color-success-bg);
+  color: #155724; // Keeping specific text contrast for the success green
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.5rem;
+  border: 1px solid #c3e6cb;
+}
+
+.contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+
+.form-group {
+  display: flex; flex-direction: column;
+
+  label {
+    font-size: 0.9rem; font-weight: 600;
+    margin-bottom: 0.4rem; color: var(--text-main);
+  }
+
+  input, textarea {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: inherit; font-size: 1rem;
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.25);
+    }
+  }
+
+  .error-text {
+    color: var(--color-error-text);
+    font-size: 0.8rem; margin-top: 0.3rem;
+  }
+}
+
+.submit-btn {
+  padding: 0.8rem 1.5rem;
+  background-color: var(--accent-color);
+  color: white;
+  border: none; border-radius: 4px;
+  font-size: 1rem; font-weight: 600;
+  cursor: pointer; transition: background-color 0.2s;
+  margin-top: 1rem;
+
+  &:hover:not(:disabled) { background-color: var(--accent-hover); }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+}
