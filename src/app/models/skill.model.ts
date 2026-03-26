@@ -1,3 +1,4 @@
+import { Course } from "./course.model";
 import { Project } from "./project-experience.model";
 import { Job } from "./work-experience.model";
 
@@ -8,4 +9,5 @@ export interface Skill {
     skillName: string;
     jobsSkillUsed: Job[];
     projectsSkillUsed: Project[];
+    coursesSkillUsed: Course[];
 }
