@@ -1,6 +1,15 @@
 @for (job of jobs; track job.id) {
   <div class="content-card" [id]="'job-' + job.id" [class.active-target]="activeFragment === 'job-' + job.id">
-    <h3>{{ job.position }} at {{ job.company }}</h3>
+    <h3>{{ job.company }}</h3>
+    <h4>{{ job.position }}</h4>
+    <p>{{job.dateStarted}} to 
+      @if (!job.isCurrentJob) {
+        {{job.dateEnded}}
+      } @else {
+        Present
+      }
+    </p>
+    
     <p>{{ job.description }}</p>
   </div>
 }
