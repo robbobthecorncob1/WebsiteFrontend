@@ -1,0 +1,24 @@
+<div class="page-container">
+  <h2 class="section-title">Relevant Coursework</h2>
+  @for (course of (courses$ | async); track course.id) {
+    <div class="content-card" [id]="'course-' + course.id" [class.active-target]="activeFragment === 'course-' + course.id">
+      <h3>{{ course.name }}</h3>
+      <a href="{{ course.url }}" target="_blank">
+        Course information
+      </a>
+      <p>{{ course.description }}</p>
+      @if (course.technologies.length > 0) {
+        <p>Languages/Frameworks: 
+        @for (tech of course.technologies; track tech) {
+          <a 
+            [routerLink]="['/resume']" 
+            [fragment]="formatSkillId(tech)" 
+            class="tech-badge">
+            {{ tech }}
+          </a>
+        } 
+        </p>
+    }
+    </div>
+  }
+</div>
