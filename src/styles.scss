@@ -100,7 +100,28 @@ a {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+.tech-badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  margin: 0.25rem 0.4rem 0.25rem 0;
+  font-size: 0.85rem;
+  font-weight: 600; 
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.2s ease;
 
+  color: var(--accent-color); 
+  background-color: rgba(var(--accent-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-rgb), 0.9);
+
+  // --- Hover State ---
+  &:hover, &:focus {
+    text-decoration: none;
+    background-color: rgba(var(--accent-rgb), 0.2);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+  }
+}
 // --- Shared Animations ---
 @keyframes highlight-pulse {
   0% {
