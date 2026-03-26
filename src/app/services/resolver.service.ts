@@ -19,6 +19,7 @@ export const appResolver: ResolveFn<any> = (route: ActivatedRouteSnapshot) => {
     case 'resume': return forkJoin({skills: portfolioService.getSkills(),jobs: portfolioService.getWorkExperience(),education: portfolioService.getEducation()});
     case 'projects': return portfolioService.getProjects();
     case 'status': return portfolioService.getSystemStatus();
+    case 'courses': return portfolioService.getCourses();
     case '': return portfolioService.getProfile(); 
     default: return of(null); 
   }

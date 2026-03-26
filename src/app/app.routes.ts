@@ -5,6 +5,7 @@ import { ProjectExperienceComponent } from './components/project-experience.comp
 import { SystemStatusComponent } from './components/system-status/system-status.component';
 import { ContactSubmissionComponent } from './components/contact-submission.component/contact-submission.component';
 import { appResolver } from './services/resolver.service';
+import { CoursesComponent } from './components/courses.component/courses.component';
 
 /**
  * Global Route Configuration for the Portfolio Application.
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: '', component: ProfileComponent, resolve: { pageData: appResolver } },
   { path: 'resume', component: ResumeComponent, resolve: { pageData: appResolver } },
   { path: 'projects', component: ProjectExperienceComponent, resolve: { pageData: appResolver } },
+  { path: 'courses', component: CoursesComponent, resolve: { pageData: appResolver } },
   { path: 'contact', component: ContactSubmissionComponent },
   { path: 'status', component: SystemStatusComponent, resolve: { pageData: appResolver } },
   { path: '**', redirectTo: '' }
