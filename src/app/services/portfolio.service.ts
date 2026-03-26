@@ -8,6 +8,7 @@ import { EducationProgram } from '../models/education-list.model';
 import { SystemStatus } from '../models/system-status.model';
 import { ContactSubmission } from '../models/contact-submission.model';
 import { Skill } from '../models/skill.model';
+import { Course } from '../models/course.model';
 
 /**
  * Handles all HTTP communication with the .NET backend for the portfolio website.
@@ -99,6 +100,14 @@ export class PortfolioService {
    */
   submitContactForm(submission: ContactSubmission): Observable<any> {
     return this.http.post(`${this.apiUrl}/contact`, submission);
+  }
+
+  /**
+   * Retrieves the user's course history.
+   * @returns An Observable emitting an array of {@link Course} records.
+   */
+  getCourses(): Observable<Course[]> {
+    return this.http.get<Course[]>(`${this.apiUrl}/courses`);
   }
   
 }
