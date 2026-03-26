@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { EducationProgram } from '../../../models/education-list.model';
+import { RouterModule } from '@angular/router';
 
 /**
  * Education List Component
@@ -9,6 +10,7 @@ import { EducationProgram } from '../../../models/education-list.model';
  */
 @Component({
   selector: 'education-list',
+  imports: [RouterModule],
   standalone: true,
   templateUrl: './education-list.component.html'
 })
