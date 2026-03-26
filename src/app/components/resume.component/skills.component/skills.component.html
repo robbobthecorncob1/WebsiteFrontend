@@ -43,6 +43,21 @@
               </div>
             }
 
+            @if (skill.coursesSkillUsed.length > 0) {
+              <div class="usage-group">
+                <h5>Coursework</h5>
+                <ul>
+                  @for (course of skill.coursesSkillUsed; track course.id) {
+                    <li>
+                      <a [routerLink]="['/courses']" [fragment]="'course-' + course.id" (click)="handleJobClick('course-' + course.id, $event)">
+                        {{ course.name }}
+                      </a>
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+
           </div>
         </div>
       </div>
