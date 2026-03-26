@@ -13,8 +13,7 @@ import { Course } from '../../models/course.model';
 @Component({
   selector: 'courses',
   imports: [AsyncPipe, RouterLink],
-  templateUrl: './courses.component.html',
-  styleUrl: './courses.component.scss'
+  templateUrl: './courses.component.html'
 })
 export class CoursesComponent implements OnInit {
   private route = inject(ActivatedRoute);
