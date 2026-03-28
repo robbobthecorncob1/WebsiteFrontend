@@ -23,7 +23,7 @@ export class PortfolioService {
   private statusSubject = new BehaviorSubject<SystemStatus | null>(null);
   public currentStatus$ = this.statusSubject.asObservable();
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5126/api/website';
+  private apiUrl = 'https://api.adamhilty.com/api/website';
 
   /**
    * Retrieves the core profile information for the portfolio owner (name, bio, headline, etc.).
