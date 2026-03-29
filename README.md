@@ -1,59 +1,70 @@
 # WebsiteFrontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.3.
+<https://adamhilty.com>
 
-## Development server
+Frontend repository for my personal portfolio. This application showcases my software engineering projects, work experience, and education at The Ohio State University. It fetches this data through a custom C# backend.
 
-To start a local development server, run:
+## About
 
-```bash
-ng serve
-```
+### Tech Stack
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+* **Framework:** Angular (Standalone Components)
+* **Language:** TypeScript
+* **Styling:** HTML5 & SCSS
+* **Hosting/Deployment:** AWS Amplify
+* **Backend Integration:** Communicates with a C# / .NET API hosted on AWS Elastic Beanstalk.
 
-## Code scaffolding
+### Key Features
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+* **Dynamic Portfolio:** Data-driven sections for Projects, Work Experience, Education, and Notable Coursework.
+* **Optimized Performance:** Utilizes Angular Pure Pipes for highly efficient DOM rendering and fragment routing.
+* **Responsive Design:** Built with CSS Flexbox to ensure a seamless experience across desktop and mobile devices.
 
-```bash
-ng generate component component-name
-```
+## Local Setup
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+To run this Angular frontend locally on your machine, follow these steps:
 
-```bash
-ng generate --help
-```
+### Prerequisites
 
-## Building
+* Node.js installed
+* Angular CLI installed globally
+* *Optional but recommended:* The companion [C# backend repository](https://github.com/robbobthecorncob1/ProfileCore) cloned and running locally.
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### 1. Clone the repository and install dependencies
 
 ```bash
-ng test
+git clone https://github.com/robbobthecorncob1/WebsiteFrontend
+cd WebsiteFrontend
+npm install
 ```
 
-## Running end-to-end tests
+### 2. Configure Environment Variables
 
-For end-to-end (e2e) testing, run:
+This project uses Angular environments to switch between local development and production API URLs. Ensure your src/environments/environment.development.ts file is configured to point to your local C# backend (default is 5126):
 
 ```bash
-ng e2e
+export const environment = {
+  apiUrl: 'http://localhost:5126/api/gpa'
+};
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### 3. Start the Development Server
 
-## Additional Resources
+```bash
+ng server
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Navigate to <http://localhost:4200/> in your browser. The application will automatically reload if you change any of the source files.
+
+## Deployment
+
+This frontend is continuously deployed using AWS Amplify.
+
+When code is pushed to the main branch, Amplify automatically triggers a build using the src/environments/environment.ts file, which points to the live production C# API: <https://api.adamhilty.com/api/gpa>
+
+## Author
+
+Adam Hilty
+
+B.S. Computer Science and Engineering  
+The Ohio State University (May 2026)
