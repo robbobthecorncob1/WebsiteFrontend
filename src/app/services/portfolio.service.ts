@@ -9,6 +9,7 @@ import { SystemStatus } from '../models/system-status.model';
 import { ContactSubmission } from '../models/contact-submission.model';
 import { Skill } from '../models/skill.model';
 import { Course } from '../models/course.model';
+import {environment} from '../../environments/environment';
 
 /**
  * Handles all HTTP communication with the .NET backend for the portfolio website.
@@ -23,7 +24,7 @@ export class PortfolioService {
   private statusSubject = new BehaviorSubject<SystemStatus | null>(null);
   public currentStatus$ = this.statusSubject.asObservable();
   private http = inject(HttpClient);
-  private apiUrl = 'https://api.adamhilty.com/api/website';
+  private apiUrl = environment.apiUrl;
 
   /**
    * Retrieves the core profile information for the portfolio owner (name, bio, headline, etc.).
