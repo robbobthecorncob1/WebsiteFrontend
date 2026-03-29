@@ -12,7 +12,8 @@ import { RouterModule } from '@angular/router';
   selector: 'education-list',
   imports: [RouterModule],
   standalone: true,
-  templateUrl: './education-list.component.html'
+  templateUrl: './education-list.component.html',
+  styleUrls: ['./education-list.component.scss']
 })
 export class EducationListComponent {
   /** 

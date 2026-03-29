@@ -1,0 +1,35 @@
+
+.education-card {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  gap: 20px; 
+}
+
+
+.education-info {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.coursework-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none; 
+  text-align: right;
+}
+
+
+.coursework-link::after {
+  content: '>';
+  color: #2c3e50; 
+  font-weight: bold;
+  font-size: 1.1em;
+  transition: transform 0.2s ease; 
+}
+
+.coursework-link:hover::after {
+  transform: translateX(4px);
+}

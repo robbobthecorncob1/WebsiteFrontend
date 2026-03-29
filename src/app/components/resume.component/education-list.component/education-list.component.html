@@ -1,9 +1,15 @@
 @for (educationProgram of educationList; track educationProgram.id) {
-  <div class="content-card">
-    <h3>{{ educationProgram.school }}</h3>
-    <h4>{{ educationProgram.degree }} in {{ educationProgram.major }}</h4>
-    <p>Specialization: Software Engineering</p>
-    <p>{{educationProgram.dateEnded}}</p>
-    <a [routerLink]="['/courses']">See some of my notable coursework!</a>
+  <div class="content-card education-card">
+    <div class="education-info">
+      <h3>{{ educationProgram.school }}</h3>
+      <h4>{{ educationProgram.degree }} in {{ educationProgram.major }}</h4>
+      <p>Specialization: Software Engineering</p>
+      <p>{{educationProgram.dateEnded}}</p>
+    </div>
+    <h3>
+      <a [routerLink]="['/courses']" class="coursework-link">
+        See some of my coursework!
+      </a>
+    </h3>
   </div>
 }
