@@ -9,7 +9,18 @@
         Present
       }
     </p>
-    
     <p>{{ job.description }}</p>
+    @if (job.technologies.length > 1) {
+        <p>Languages/Frameworks: 
+        @for (tech of job.technologies; track tech) {
+          <a 
+            [routerLink]="['/resume']" 
+            [fragment]="tech | formatSkillId"
+            class="tech-badge">
+            {{ tech }}
+          </a>
+        } 
+        </p>
+      }
   </div>
 }

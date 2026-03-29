@@ -3,6 +3,7 @@ import { Observable, map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Course } from '../../models/course.model';
+import { FormatSkillIdPipe } from '../../pipes/format-skill-id-pipe'
 
 /**
  * Courses
@@ -12,7 +13,7 @@ import { Course } from '../../models/course.model';
  */
 @Component({
   selector: 'courses',
-  imports: [AsyncPipe, RouterLink],
+  imports: [AsyncPipe, RouterLink, FormatSkillIdPipe],
   templateUrl: './courses.component.html'
 })
 export class CoursesComponent implements OnInit {
@@ -47,14 +48,5 @@ export class CoursesComponent implements OnInit {
       }
     });
   }
-
-  /**
-   * Helper to transform technology names into consistent HTML IDs.
-   * Used for generating back-links to the Skills section.
-   * @param skillName - The raw name of the technology (e.g., "C#")
-   * @returns A kebab-case ID (e.g., "skill-c#")
-   */
-  formatSkillId(skillName: string): string {
-    return 'skill-' + skillName.replace(/\s+/g, '-').toLowerCase();
-  }
+  
 }

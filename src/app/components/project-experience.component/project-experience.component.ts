@@ -3,7 +3,7 @@ import { Observable, map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { Project } from '../../models/project-experience.model';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-
+import { FormatSkillIdPipe } from '../../pipes/format-skill-id-pipe'
 /**
  * Project Experience Component
  * Renders a list of personal and professional software projects.
@@ -12,7 +12,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
  */
 @Component({
   selector: 'projects',
-  imports: [AsyncPipe, RouterLink],
+  imports: [AsyncPipe, RouterLink, FormatSkillIdPipe],
   templateUrl: './project-experience.component.html'
 })
 export class ProjectExperienceComponent implements OnInit {
@@ -46,15 +46,5 @@ export class ProjectExperienceComponent implements OnInit {
         }, 100);
       }
     });
-  }
-
-  /**
-   * Helper to transform technology names into consistent HTML IDs.
-   * Used for generating back-links to the Skills section.
-   * @param skillName - The raw name of the technology (e.g., "C#")
-   * @returns A kebab-case ID (e.g., "skill-c#")
-   */
-  formatSkillId(skillName: string): string {
-    return 'skill-' + skillName.replace(/\s+/g, '-').toLowerCase();
   }
 }

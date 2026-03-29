@@ -1,7 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { Skill } from '../../../models/skill.model';
+import { FormatSkillIdPipe } from '../../../pipes/format-skill-id-pipe'
 
 /**
  * Extended Skill interface to manage UI-specific state (flipping).
@@ -20,14 +21,15 @@ interface SkillUI extends Skill {
 @Component({
   selector: 'skills',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormatSkillIdPipe],
+  providers: [FormatSkillIdPipe],
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.scss']
 })
 export class SkillsComponent implements OnInit {
   skills: SkillUI[] = [];
   public activeFragment: string | null = null;
-
+  private formatSkillIdPipe = inject(FormatSkillIdPipe);
   /**
    * Data Input Setter
    * Intercepts the raw data from the parent and transforms it into 
@@ -53,7 +55,7 @@ export class SkillsComponent implements OnInit {
         if (this.skills.length > 0) {
           this.skills = this.skills.map(skill => ({
             ...skill, 
-            isFlipped: this.formatSkillId(skill.skillName) === fragment
+            isFlipped: this.formatSkillIdPipe.transform(skill.skillName) === fragment
           }));
           this.cdr.detectChanges(); 
         }
@@ -104,13 +106,4 @@ export class SkillsComponent implements OnInit {
     skill.isFlipped = !skill.isFlipped;
   }
   
-/**
-   * Helper to transform technology names into consistent HTML IDs.
-   * Used for generating back-links to the Skills section.
-   * @param skillName - The raw name of the technology (e.g., "C#")
-   * @returns A kebab-case ID (e.g., "skill-c#")
-   */
-  formatSkillId(skillName: string): string {
-    return 'skill-' + skillName.replace(/\s+/g, '-').toLowerCase();
-  }
 }

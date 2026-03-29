@@ -1,6 +1,6 @@
 <div class="skills-grid">
   @for (skill of skills; track skill.skillName) {
-    <div class="skill-card" [class.flipped]="skill.isFlipped" (click)="toggleFlip(skill)" [id]="formatSkillId(skill.skillName)" [class.active-target]="activeFragment === formatSkillId(skill.skillName)">
+    <div class="skill-card" [class.flipped]="skill.isFlipped" (click)="toggleFlip(skill)" [id]="skill.skillName | formatSkillId" [class.active-target]="activeFragment === (skill.skillName | formatSkillId)">
       
       <div class="card-inner">
         <div class="card-front">

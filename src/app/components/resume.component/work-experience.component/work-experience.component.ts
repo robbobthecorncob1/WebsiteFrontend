@@ -1,6 +1,8 @@
 import { Component, inject, OnInit, Input } from '@angular/core';
 import { Job } from '../../../models/work-experience.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterModule } from '@angular/router';
+import { FormatSkillIdPipe } from '../../../pipes/format-skill-id-pipe'
+import { CommonModule } from '@angular/common';
 
 /**
  * Work Experience Component is a presentational component that renders a list of professional roles.
@@ -9,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
  */
 @Component({
   selector: 'work-experience',
+  imports: [FormatSkillIdPipe, RouterModule, CommonModule, RouterLink],
   standalone: true,
   templateUrl: './work-experience.component.html'
 })

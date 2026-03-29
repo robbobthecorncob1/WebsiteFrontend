@@ -12,13 +12,13 @@
         @for (tech of project.technologies; track tech) {
           <a 
             [routerLink]="['/resume']" 
-            [fragment]="formatSkillId(tech)" 
+            [fragment]="tech | formatSkillId" 
             class="tech-badge">
             {{ tech }}
           </a>
         } 
         </p>
-    }
+      }
     </div>
   }
 </div>
